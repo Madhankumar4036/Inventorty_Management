@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+<h3>Products</h3>
+<form method="post" action="/add_product">
+  <input type="text" name="product_id" placeholder="Product ID" required>
+  <input type="text" name="product_name" placeholder="Product Name" required>
+  <button class="btn btn-primary">Add</button>
+</form>
+<table class="table mt-3">
+<tr><th>ID</th><th>Name</th></tr>
+{% for p in products %}
+<tr><td>{{ p.product_id }}</td><td>{{ p.product_name }}</td></tr>
+{% endfor %}
+</table>
+{% endblock %}

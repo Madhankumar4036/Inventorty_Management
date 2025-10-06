@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block content %}
+<h3>Product Movements</h3>
+<form method="post" action="/add_movement">
+  <select name="product_id" required>
+    <option value="">Select Product</option>
+    {% for p in products %}
+    <option value="{{ p.product_id }}">{{ p.product_name }}</option>
+    {% endfor %}
+  </select>
+  <select name="from_location">
+    <option value="">From Location</option>
+    {% for l in locations %}
+    <option value="{{ l.location_id }}">{{ l.location_name }}</option>
+    {% endfor %}
+  </select>
+  <select name="to_location">
+    <option value="">To Location</option>
+    {% for l in locations %}
+    <option value="{{ l.location_id }}">{{ l.location_name }}</option>
+    {% endfor %}
+  </select>
+  <input type="number" name="qty" placeholder="Qty" required>
+  <button class="btn btn-primary">Add</button>
+</form>
+
+<table class="table mt-3">
+<tr><th>Product</th><th>From</th><th>To</th><th>Qty</th><th>Time</th></tr>
+{% for m in movements %}
+<tr>
+  <td>{{ m.product_id }}</td>
+  <td>{{ m.from_location or '-' }}</td>
+  <td>{{ m.to_location or '-' }}</td>
+  <td>{{ m.qty }}</td>
+  <td>{{ m.timestamp.strftime('%Y-%m-%d %H:%M') }}</td>
+</tr>
+{% endfor %}
+</table>
+{% endblock %}
